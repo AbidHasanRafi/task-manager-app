@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block title %}Task List{% endblock %}
+
+{% block content %}
+    <div class="container mt-4">
+        <!-- Project Info Card -->
+        <div class="card shadow-sm mb-4">
+            <div class="card-body">
+                <h2 class="card-title text-primary">📌 Task Manager App</h2>
+                <p class="card-text"><strong>Description:</strong> A simple task management application where users can create, update, and delete tasks.</p>
+                <p class="card-text"><strong>Developer:</strong> Md. Abid Hasan Rafi</p>
+                <p class="card-text"><strong>Student ID:</strong> 2102103</p>
+                <p class="card-text"><strong>Department:</strong> Electronics and Communication Engineering, HSTU</p>
+            </div>
+        </div>
+
+        <!-- Task List Section -->
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <h1 class="text-dark">📝 Task List</h1>
+            <a href="{% url 'task_create' %}" class="btn btn-primary">+ Add Task</a>
+        </div>
+        
+        <div class="card shadow-sm">
+            <div class="card-body">
+                <ul class="list-group list-group-flush">
+                    {% for task in tasks %}
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <span class="fw-bold">{{ task.title }}</span>
+                            <div class="d-flex gap-5">
+                                <a href="{% url 'task_detail' task.pk %}" class="btn btn-outline-info btn-sm">🔍 Details</a>
+                                <a href="{% url 'task_update' task.pk %}" class="btn btn-outline-secondary btn-sm ml-1">✏️ Edit</a>
+                                <a href="{% url 'task_delete' task.pk %}" class="btn btn-outline-danger btn-sm ml-1">🗑️ Delete</a>
+                            </div>
+                        </li>
+                    {% empty %}
+                        <li class="list-group-item text-center text-muted">No tasks available. Start by adding a new task.</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+{% endblock %}

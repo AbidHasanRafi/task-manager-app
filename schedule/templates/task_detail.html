@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block title %}Task Detail{% endblock %}
+
+{% block content %}
+    <div class="container mt-4">
+        <div class="card shadow-sm">
+            <div class="card-body">
+                <h2 class="card-title text-primary text-center">📌 {{ task.title }}</h2>
+                <hr>
+                <p class="fs-5"><strong>Description:</strong> {{ task.description }}</p>
+                <p class="fs-6 text-muted"><strong>Deadline:</strong> 🗓️ {{ task.deadline }}</p>
+                <p class="fs-6">
+                    <strong>Status:</strong>  
+                    <span class="badge 
+                        {% if task.status == 'Completed' %}bg-success
+                        {% elif task.status == 'Pending' %}bg-warning
+                        {% else %}bg-info{% endif %}">
+                        {{ task.status }}
+                    </span>
+                </p>
+
+                <div class="d-flex justify-content-between mt-4">
+                    <a href="{% url 'task_update' task.pk %}" class="btn btn-outline-secondary px-4">✏️ Edit</a>
+                    <a href="{% url 'task_delete' task.pk %}" class="btn btn-outline-danger px-4">🗑️ Delete</a>
+                    <a href="{% url 'task_list' %}" class="btn btn-primary px-4">⬅️ Back to list</a>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
